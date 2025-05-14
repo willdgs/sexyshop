@@ -1,0 +1,19 @@
+<h1>{{ categoria.nome }}</h1>
+<div class="row">
+    {% for produto in produtos %}
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                {% if produto.imagem %}
+                    <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ produto.nome }}</h5>
+                    <p class="card-text">{{ produto.descricao }}</p>
+                    <p><strong>R$ {{ produto.preco }}</strong></p>
+                    <a href="{% url 'detalhe_produto' produto.id %}" class="btn btn-secondary">Ver Detalhes</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<a href="{% url 'home' %}" class="btn btn-primary">Voltar</a>

@@ -1,0 +1,13 @@
+<h1>{{ produto.nome }}</h1>
+<div class="row">
+    <div class="col-md-6">
+        {% if produto.imagem %}
+            <img src="{{ produto.imagem.url }}" class="img-fluid" alt="{{ produto.nome }}">
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+        <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Voltar</a>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sexy Shop - Loja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .banner {
+            background-image: url('https://via.placeholder.com/1200x400'); /* Coloque a URL de um banner aqui */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        .banner h1 {
+            font-size: 3em;
+            font-weight: bold;
+        }
+        .category-card {
+            background-color: #ff3366;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .category-card a {
+            color: white;
+            text-decoration: none;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .product-card img {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>Bem-vindo ao Sexy Shop</h1>
+        <p>Encontre os melhores produtos para apimentar a sua vida</p>
+    </div>
+
+    <div class="container my-5">
+        <!-- Categorias -->
+        <h2 class="mb-4">Categorias</h2>
+        <div class="row">
+            {% for categoria in categorias %}
+                <div class="col-md-3 mb-4">
+                    <div class="category-card p-3 text-center">
+                        <h5 class="card-title">{{ categoria.nome }}</h5>
+                        <a href="{% url 'produtos_por_categoria' categoria.id %}" class="btn btn-light">Ver Produtos</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Produtos em Destaque -->
+        <h2 class="mt-5">Todos os Produtos</h2>
+        <div class="row">
+            {% for produto in produtos %}
+                <div class="col-md-3 mb-4">
+                    <div class="product-card">
+                        {% if produto.imagem %}
+                            <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}" style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produto.nome }}</h5>
+                            <p class="card-text">{{ produto.descricao }}</p>
+                            <p><strong>R$ {{ produto.preco }}</strong></p>
+                            <a href="{% url 'detalhe_produto' produto.id %}" class="btn btn-secondary">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
